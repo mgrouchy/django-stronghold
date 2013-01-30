@@ -1,8 +1,7 @@
 import re
 
 from django.contrib.auth.decorators import login_required
-from django.conf import settings
-
+import stronghold
 
 class LoginRequiredMiddleware(object):
     """
@@ -15,7 +14,7 @@ class LoginRequiredMiddleware(object):
     each url in STRONGHOLD_PUBLIC_URLS must be a valid regex
     """
     def __init__(self, *args, **kwargs):
-        pub_views = getattr(settings, 'STRONGHOLD_PUBLIC_URLS', ())
+        pub_views = getattr(stronghold.conf, 'STRONGHOLD_PUBLIC_URLS', ())
         self.public_view_urls = [re.compile(v) for v in pub_views]
 
     def process_view(self, request, view_func, view_args, view_kwargs):
