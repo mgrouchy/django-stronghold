@@ -20,6 +20,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     ...
     'stronghold',
+)
 ```
 
 Then add the stronghold middleware to your MIDDLEWARE_CLASSES in your Django settings file
@@ -30,6 +31,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     ...
     'stronghold.middleware.LoginRequiredMiddleware',
+)
 ```
 
 
