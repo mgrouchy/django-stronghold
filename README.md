@@ -32,8 +32,56 @@ MIDDLEWARE_CLASSES = (
     ...
     'stronghold.middleware.LoginRequiredMiddleware',
 )
+
 ```
 
+##Usage
+
+If you followed the installation instructions now all your views are defaulting to require a login.
+To make a view public again you can use the public decorator provided in `stronghold.decorators` like so:
+
+###For function based views 
+```python
+from stronghold.decorators import public
+
+
+@public
+def someview(request):
+	# do some work
+	...
+
+```
+
+###for class based views
+
+```python
+from django.utils.decorators import method_decorator
+from stronghold.decorators import public
+
+
+class SomeView(View):
+	def get(self, request, *args, **kwargs):
+		# some view logic
+		...
+
+	@method_decorator(public)
+	def dispatch(self, *args, **kwargs):
+    	return super(SomeView, self).dispatch(*args, **kwargs)
+```
+
+##Configuration (optional)
+
+You can add a tuple pf public url regexes in your settings file with the `STRONGHOLD_PUBLIC_URLS` setting.
+
+Default setting when debug == False :
+```python	
+STRONGHOLD_PUBLIC_URLS = ()
+```
+
+Default setting when debug == True :
+```python	
+STRONGHOLD_PUBLIC_URLS = (r'^/static/.+$', r'^/media/.+$')
+```
 
 
 ##Contribute
