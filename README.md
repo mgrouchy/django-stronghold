@@ -44,7 +44,7 @@ from stronghold.decorators import public
 @public
 def someview(request):
 	# do some work
-	...
+	#...
 
 ```
 
@@ -58,7 +58,7 @@ from stronghold.decorators import public
 class SomeView(View):
 	def get(self, request, *args, **kwargs):
 		# some view logic
-		...
+		#...
 
 	@method_decorator(public)
 	def dispatch(self, *args, **kwargs):
