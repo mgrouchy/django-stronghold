@@ -8,7 +8,7 @@ except ImportError:
 
 
 dependencies = []
-
+test_dependencies = ['django>1.3.1']
 
 setup(
     name='django-stronghold',
@@ -22,6 +22,7 @@ setup(
     ],
     license='MIT license',
     install_requires=dependencies,
+    tests_require=test_dependencies,
     long_description=open('README.md').read(),
     classifiers=(
         'Development Status :: 4 - Beta',
