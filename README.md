@@ -1,11 +1,13 @@
-#django-stronghold - Get inside your stronghold and make all your Django views default login_required 
+#Stronghold
+
+Get inside your stronghold and make all your Django views default login_required
 
 Stronghold is a very small and easy to use django app that makes all your Django project default to require login for all of your views.
 
 
 ##Installation
 
-Install via pip. 
+Install via pip.
 
 ```sh
 pip install django-stronghold
@@ -36,7 +38,7 @@ MIDDLEWARE_CLASSES = (
 If you followed the installation instructions now all your views are defaulting to require a login.
 To make a view public again you can use the public decorator provided in `stronghold.decorators` like so:
 
-###For function based views 
+###For function based views
 ```python
 from stronghold.decorators import public
 
@@ -70,12 +72,12 @@ class SomeView(View):
 You can add a tuple pf public url regexes in your settings file with the `STRONGHOLD_PUBLIC_URLS` setting.
 
 Default setting when debug == False :
-```python	
+```python
 STRONGHOLD_PUBLIC_URLS = ()
 ```
 
 Default setting when debug == True :
-```python	
+```python
 STRONGHOLD_PUBLIC_URLS = (r'^/static/.+$', r'^/media/.+$')
 ```
 
