@@ -2,7 +2,7 @@ import re
 
 from django.contrib.auth.decorators import login_required
 from stronghold import conf
-import stronghold
+
 
 class LoginRequiredMiddleware(object):
     """
