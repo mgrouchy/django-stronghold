@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Django-stronghold by mgrouchy</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Django-stronghold</h1>
+        <p class="header">Get inside your stronghold and make all your Django views default login_required</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/mgrouchy/django-stronghold/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/mgrouchy/django-stronghold/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/mgrouchy/django-stronghold">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/mgrouchy">mgrouchy</a></p>
+
+
+      </header>
+      <section>
+        <h1>Stronghold</h1>
+
+<p>Get inside your stronghold and make all your Django views default login_required</p>
+
+<p>Stronghold is a very small and easy to use django app that makes all your Django project default to require login for all of your views.</p>
+
+<h2>Installation</h2>
+
+<p>Install via pip.</p>
+
+<div class="highlight"><pre>pip install django-stronghold
+</pre></div>
+
+<p>Add stronghold to your INSTALLED_APPS in your Django settings file</p>
+
+<div class="highlight"><pre>
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c">#...</span>
+    <span class="s">'stronghold'</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+<p>Then add the stronghold middleware to your MIDDLEWARE_CLASSES in your Django settings file</p>
+
+<div class="highlight"><pre><span class="n">MIDDLEWARE_CLASSES</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c">#...</span>
+    <span class="s">'stronghold.middleware.LoginRequiredMiddleware'</span><span class="p">,</span>
+<span class="p">)</span>
+
+</pre></div>
+
+<h2>Usage</h2>
+
+<p>If you followed the installation instructions now all your views are defaulting to require a login.
+To make a view public again you can use the public decorator provided in <code>stronghold.decorators</code> like so:</p>
+
+<h3>For function based views</h3>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">stronghold.decorators</span> <span class="kn">import</span> <span class="n">public</span>
+
+
+<span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">someview</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c"># do some work</span>
+    <span class="c">#...</span>
+
+</pre></div>
+
+<h3>for class based views</h3>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.utils.decorators</span> <span class="kn">import</span> <span class="n">method_decorator</span>
+<span class="kn">from</span> <span class="nn">stronghold.decorators</span> <span class="kn">import</span> <span class="n">public</span>
+
+
+<span class="k">class</span> <span class="nc">SomeView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c"># some view logic</span>
+        <span class="c">#...</span>
+
+    <span class="nd">@method_decorator</span><span class="p">(</span><span class="n">public</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">SomeView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+
+<h2>Configuration (optional)</h2>
+
+<p>You can add a tuple pf public url regexes in your settings file with the <code>STRONGHOLD_PUBLIC_URLS</code> setting.</p>
+
+<p>Default setting when debug == False :</p>
+
+<div class="highlight"><pre><span class="n">STRONGHOLD_PUBLIC_URLS</span> <span class="o">=</span> <span class="p">()</span>
+</pre></div>
+
+<p>Default setting when debug == True :</p>
+
+<div class="highlight"><pre><span class="n">STRONGHOLD_PUBLIC_URLS</span> <span class="o">=</span> <span class="p">(</span><span class="s">r'^/static/.+$'</span><span class="p">,</span> <span class="s">r'^/media/.+$'</span><span class="p">)</span>
+</pre></div>
+
+<h2>Contribute</h2>
+
+<p>See CONTRIBUTING.md</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
