@@ -1,3 +1,5 @@
+![travis](https://travis-ci.org/mgrouchy/django-stronghold.png?branch=master)
+
 #Stronghold
 
 Get inside your stronghold and make all your Django views default login_required
