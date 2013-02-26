@@ -84,8 +84,8 @@ Default setting when debug == True:
 STRONGHOLD_PUBLIC_URLS = (
     r'^%s.+$' % settings.STATIC_URL,
     r'^%s.+$' % settings.MEDIA_URL,
-    r'^%s$' % reverse('login'),
-    r'^%s$' % reverse('logout')
+    r'^%s$' % settings.LOGIN_URL,
+    r'^%s$' % settings.LOGOUT_URL
 )
 
 In debug mode, we declare the common urls for your Static files, media and login/login public.
