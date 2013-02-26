@@ -71,16 +71,25 @@ class SomeView(View):
 
 ##Configuration (optional)
 
-You can add a tuple pf public url regexes in your settings file with the `STRONGHOLD_PUBLIC_URLS` setting.
+You can add a tuple of public url regexes in your settings file with the `STRONGHOLD_PUBLIC_URLS` setting.
 
 Default setting when debug == False :
 ```python
 STRONGHOLD_PUBLIC_URLS = ()
 ```
 
-Default setting when debug == True :
+Default setting when debug == True:
+
 ```python
-STRONGHOLD_PUBLIC_URLS = (r'^/static/.+$', r'^/media/.+$')
+STRONGHOLD_PUBLIC_URLS = (
+    r'^%s.+$' % settings.STATIC_URL,
+    r'^%s.+$' % settings.MEDIA_URL,
+    r'^%s$' % reverse('login'),
+    r'^%s$' % reverse('logout')
+)
+
+In debug mode, we declare the common urls for your Static files, media and login/login public.
+
 ```
 
 

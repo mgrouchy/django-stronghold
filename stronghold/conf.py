@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
+
 if settings.DEBUG:
     # In Debug mode we serve the media urls as public by default
     # We should also serve the login/logout pages as public
@@ -9,7 +10,7 @@ if settings.DEBUG:
         r'^%s.+$' % settings.MEDIA_URL,
         r'^%s$' % reverse('login'),
         r'^%s$' % reverse('logout')
-        )
+    )
 else:
     # make no such assumptions in production
     STRONGHOLD_PUBLIC_URLS = ()
