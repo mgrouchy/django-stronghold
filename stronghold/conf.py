@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
 
 
 if settings.DEBUG:
@@ -8,8 +7,8 @@ if settings.DEBUG:
     STRONGHOLD_PUBLIC_URLS = (
         r'^%s.+$' % settings.STATIC_URL,
         r'^%s.+$' % settings.MEDIA_URL,
-        r'^%s$' % reverse('login'),
-        r'^%s$' % reverse('logout')
+        r'^%s$' % settings.LOGIN_URL,
+        r'^%s$' % settings.LOGOUT_URL,
     )
 else:
     # make no such assumptions in production
