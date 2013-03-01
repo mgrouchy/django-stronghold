@@ -90,6 +90,11 @@ In debug mode, we append the common urls for your Static files and media files t
 
 ```
 
+##Compatiblity
+Test with:
+* Django 1.4.x
+* Django 1.5
+
 ##Contribute
 
 See CONTRIBUTING.md
