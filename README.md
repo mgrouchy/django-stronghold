@@ -85,14 +85,16 @@ Default setting when debug == True:
 STRONGHOLD_PUBLIC_URLS = (
     r'^%s.+$' % settings.STATIC_URL,
     r'^%s.+$' % settings.MEDIA_URL,
-    r'^%s$' % settings.LOGIN_URL,
-    r'^%s$' % settings.LOGOUT_URL
 )
 
-In debug mode, we declare the common urls for your Static files, media and login/login public.
+In debug mode, we append the common urls for your Static files and media files to your chosen `STRONGHOLD_PUBLIC_URLS`.
 
 ```
 
+##Compatiblity
+Test with:
+* Django 1.4.x
+* Django 1.5
 
 ##Contribute
 
