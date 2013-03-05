@@ -75,7 +75,9 @@ class SomeView(View):
 ###STRONGHOLD_DEFAULTS
 
 Use Strongholds defaults in addition to your own settings.
+
 **Default**:
+
 ```python
 STRONGHOLD_DEFAULTS = True
 ```
