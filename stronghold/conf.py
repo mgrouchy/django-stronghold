@@ -1,6 +1,6 @@
 import re
 
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 
 
@@ -20,7 +20,19 @@ if STRONGHOLD_DEFAULTS:
             r'^%s.+$' % settings.MEDIA_URL,
         )
 
-STRONGHOLD_PUBLIC_URLS += [r'^%s$' % reverse(url) for url in STRONGHOLD_PUBLIC_NAMED_URLS]
+# named urls can be unsafe if a user puts the wrong url in. Right now urls that
+# dont reverse are just ignored with a warning. Maybe in the future make this
+# so it breaks?
+named_urls = []
+for named_url in STRONGHOLD_PUBLIC_NAMED_URLS:
+    try:
+        url = reverse(named_url)
+        named_urls.append(url)
+    except NoReverseMatch:
+        print "Stronghold: Could not reverse Named URL: '%s'. Is it in your `urlpatterns`? Ignoring." % named_url
+
+
+STRONGHOLD_PUBLIC_URLS += tuple(['^%s$' % reverse(url) for url in named_urls])
 
 if STRONGHOLD_PUBLIC_URLS:
     STRONGHOLD_PUBLIC_URLS = [re.compile(v) for v in STRONGHOLD_PUBLIC_URLS]
