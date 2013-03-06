@@ -118,12 +118,11 @@ call will be made public without using the `@public` decorator:
 STRONGHOLD_NAMED_URLS = ()
 ```
 
-If STRONGHOLD_DEFAULTS is True additionally we search for `django.contrib.auth'
+If STRONGHOLD_DEFAULTS is True additionally we search for `django.contrib.auth`
 if it exists, we add the login and logout view names to `STRONGHOLD_NAMED_URLS`
 
-```
-
 ##Compatiblity
+
 Test with:
 * Django 1.4.x
 * Django 1.5
