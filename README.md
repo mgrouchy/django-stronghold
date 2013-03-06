@@ -72,22 +72,54 @@ class SomeView(View):
 
 ##Configuration (optional)
 
-You can add a tuple of public url regexes in your settings file with the `STRONGHOLD_PUBLIC_URLS` setting.
 
-Default setting when debug == False :
+###STRONGHOLD_DEFAULTS
+
+Use Strongholds defaults in addition to your own settings.
+
+**Default**:
+
+```python
+STRONGHOLD_DEFAULTS = True
+```
+
+You can add a tuple of url regexes in your settings file with the
+`STRONGHOLD_PUBLIC_URLS` setting. Any url that matches against these patterns
+ will be made public without using the `@public` decorator.
+
+
+###STRONGHOLD_PUBLIC_URLS
+
+**Default**:
 ```python
 STRONGHOLD_PUBLIC_URLS = ()
 ```
 
-Default setting when debug == True:
-
+If STRONGHOLD_DEFAULTS is True STRONGHOLD_PUBLIC_URLS contains:
 ```python
-STRONGHOLD_PUBLIC_URLS = (
+(
     r'^%s.+$' % settings.STATIC_URL,
     r'^%s.+$' % settings.MEDIA_URL,
 )
 
-In debug mode, we append the common urls for your Static files and media files to your chosen `STRONGHOLD_PUBLIC_URLS`.
+```
+When settings.DEBUG = True. This is additive to your settings to support serving
+Static files and media files from the development server. It does not replace any
+settings you may have in `STRONGHOLD_PUBLIC_URLS`.
+
+###STRONGHOLD_NAMED_URLS
+You can add a tuple of url names in your settings file with the
+`STRONGHOLD_NAMED_URLS` setting. Names in this setting will be reversed using
+`django.core.urlresolvers.reverse` and any url matching the output of the reverse
+call will be made public without using the `@public` decorator:
+
+**Default**:
+```python
+STRONGHOLD_NAMED_URLS = ()
+```
+
+If STRONGHOLD_DEFAULTS is True additionally we search for `django.contrib.auth'
+if it exists, we add the login and logout view names to `STRONGHOLD_NAMED_URLS`
 
 ```
 
