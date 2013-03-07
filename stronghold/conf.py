@@ -32,7 +32,7 @@ for named_url in STRONGHOLD_PUBLIC_NAMED_URLS:
         print "Stronghold: Could not reverse Named URL: '%s'. Is it in your `urlpatterns`? Ignoring." % named_url
 
 
-STRONGHOLD_PUBLIC_URLS += tuple(named_urls)
+STRONGHOLD_PUBLIC_URLS += tuple(['^%s$' % url for url in named_urls])
 
 if STRONGHOLD_PUBLIC_URLS:
     STRONGHOLD_PUBLIC_URLS = [re.compile(v) for v in STRONGHOLD_PUBLIC_URLS]
