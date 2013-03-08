@@ -69,3 +69,11 @@ class LoginRequiredMiddlewareTests(TestCase):
         response = self.middleware.process_view(**self.kwargs)
 
         self.assertEqual(response, None)
+
+    def test_returns_none_when_url_is_decorated_public(self):
+        self.request.user.is_authenticated.return_value = False
+
+        self.kwargs['view_func'].STRONGHOLD_IS_PUBLIC = True
+        response = self.middleware.process_view(**self.kwargs)
+
+        self.assertEqual(response, None)
