@@ -38,13 +38,6 @@ class LoginRequiredMiddlewareTests(TestCase):
 
         self.assertEqual(response, None)
 
-    def test_redirects_to_login_when_url_is_not_in_public_urls(self):
-        self.request.user.is_authenticated.return_value = False
-
-        response = self.middleware.process_view(**self.kwargs)
-
-        self.assertEqual(response.status_code, 302)
-
     def test_returns_none_when_url_is_in_public_urls(self):
         self.request.user.is_authenticated.return_value = False
         self.middleware.public_view_urls = [re.compile(r'/test-protected-url/')]
