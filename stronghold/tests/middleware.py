@@ -4,9 +4,21 @@ import re
 from stronghold import conf
 from stronghold.middleware import LoginRequiredMiddleware
 
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.test import TestCase
 from django.test.client import RequestFactory
+
+
+class StrongholdMiddlewareTestCase(TestCase):
+
+    def test_public_view_is_public(self):
+        response = self.client.get(reverse('public_view'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_private_view_is_private(self):
+        response = self.client.get(reverse('protected_view'))
+        self.assertEqual(response.status_code, 302)
 
 
 class LoginRequiredMiddlewareTests(TestCase):
