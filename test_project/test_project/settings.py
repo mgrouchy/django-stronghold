@@ -27,7 +27,7 @@ USE_L10N = True
 USE_TZ = True
 
 MEDIA_ROOT = ''
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
