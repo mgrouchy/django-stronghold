@@ -107,6 +107,13 @@ When settings.DEBUG = True. This is additive to your settings to support serving
 Static files and media files from the development server. It does not replace any
 settings you may have in `STRONGHOLD_PUBLIC_URLS`.
 
+#### Note
+
+You must change settings.MEDIA_URL to something other than its default value
+otherwise the middleware is not going to work. This is because one of the 
+STRONGHOLD_PUBLIC_URLS will end up being '^.+$' which causes unexpected
+behavior.
+
 ###STRONGHOLD_NAMED_URLS
 You can add a tuple of url names in your settings file with the
 `STRONGHOLD_NAMED_URLS` setting. Names in this setting will be reversed using
