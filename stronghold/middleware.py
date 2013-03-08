@@ -27,6 +27,7 @@ class LoginRequiredMiddleware(object):
 
         # if this view matches a whitelisted regex, don't process it
         for view_url in self.public_view_urls:
+            print request.path
             if view_url.match(request.path):
                 return None
 
