@@ -26,16 +26,25 @@ class StrongholdMiddlewareTestCase(TestCase):
 
 class LoginRequiredMiddlewareTests(TestCase):
 
-    def test_redirects_to_login_when_not_authenticated(self):
-        request = RequestFactory().get('/')
-        request.user = mock.Mock()
-        request.user.is_authenticated.return_value = False
+    def setUp(self):
+        self.request = RequestFactory().get('/')
+        self.request.user = mock.Mock()
 
-        response = LoginRequiredMiddleware().process_view(
-            request=request,
-            view_func=HttpResponse,
-            view_args=[],
-            view_kwargs={}
-        )
+        self.kwargs = {
+            'view_func': HttpResponse,
+            'view_args': [],
+            'view_kwargs': {},
+            'request': self.request,
+        }
+
+    def test_redirects_to_login_when_not_authenticated(self):
+        self.request.user.is_authenticated.return_value = False
+
+        response = LoginRequiredMiddleware().process_view(**self.kwargs)
 
         self.assertEqual(response.status_code, 302)
+
+    def test_returns_none_when_authenticated(self):
+        response = LoginRequiredMiddleware().process_view(**self.kwargs)
+
+        self.assertEqual(response, None)
