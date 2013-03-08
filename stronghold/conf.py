@@ -15,10 +15,14 @@ if STRONGHOLD_DEFAULTS:
     if settings.DEBUG:
         # In Debug mode we serve the media urls as public by default as a
         # convenience. We make no other assumptions
-        STRONGHOLD_PUBLIC_URLS += (
-            r'^%s.+$' % settings.STATIC_URL,
-            r'^%s.+$' % settings.MEDIA_URL,
-        )
+        static_url = getattr(settings, 'STATIC_URL', None)
+        media_url = getattr(settings, 'MEDIA_URL', None)
+
+        if static_url:
+            STRONGHOLD_PUBLIC_URLS += (r'^%s.+$' % media_url, )
+
+        if media_url:
+            STRONGHOLD_PUBLIC_URLS += (r'^%s.+$' % media_url, )
 
 # named urls can be unsafe if a user puts the wrong url in. Right now urls that
 # dont reverse are just ignored with a warning. Maybe in the future make this
