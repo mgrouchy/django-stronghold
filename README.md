@@ -6,7 +6,7 @@ Get inside your stronghold and make all your Django views default login_required
 
 Stronghold is a very small and easy to use django app that makes all your Django project default to require login for all of your views.
 
-WARNING: still in development, so some of the DEFAULTS and such will be changing without notice. 
+WARNING: still in development, so some of the DEFAULTS and such will be changing without notice.
 
 ##Installation
 
@@ -106,6 +106,8 @@ If STRONGHOLD_DEFAULTS is True STRONGHOLD_PUBLIC_URLS contains:
 When settings.DEBUG = True. This is additive to your settings to support serving
 Static files and media files from the development server. It does not replace any
 settings you may have in `STRONGHOLD_PUBLIC_URLS`.
+
+> Note: Public URL regexes are matched against `[HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info)`
 
 ###STRONGHOLD_NAMED_URLS
 You can add a tuple of url names in your settings file with the
