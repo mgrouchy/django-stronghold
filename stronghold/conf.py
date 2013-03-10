@@ -19,7 +19,7 @@ if STRONGHOLD_DEFAULTS:
         media_url = getattr(settings, 'MEDIA_URL', None)
 
         if static_url:
-            STRONGHOLD_PUBLIC_URLS += (r'^%s.+$' % media_url, )
+            STRONGHOLD_PUBLIC_URLS += (r'^%s.+$' % static_url, )
 
         if media_url:
             STRONGHOLD_PUBLIC_URLS += (r'^%s.+$' % media_url, )
