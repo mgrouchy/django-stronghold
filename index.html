@@ -30,11 +30,15 @@
 
       </header>
       <section>
-        <h1>Stronghold</h1>
+        <p><img src="https://travis-ci.org/mgrouchy/django-stronghold.png?branch=master" alt="travis"></p>
+
+<h1>Stronghold</h1>
 
 <p>Get inside your stronghold and make all your Django views default login_required</p>
 
 <p>Stronghold is a very small and easy to use django app that makes all your Django project default to require login for all of your views.</p>
+
+<p>WARNING: still in development, so some of the DEFAULTS and such will be changing without notice.</p>
 
 <h2>Installation</h2>
 
@@ -96,19 +100,66 @@ To make a view public again you can use the public decorator provided in <code>s
 
 <h2>Configuration (optional)</h2>
 
-<p>You can add a tuple pf public url regexes in your settings file with the <code>STRONGHOLD_PUBLIC_URLS</code> setting.</p>
+<h3>STRONGHOLD_DEFAULTS</h3>
 
-<p>Default setting when debug == False :</p>
+<p>Use Strongholds defaults in addition to your own settings.</p>
+
+<p><strong>Default</strong>:</p>
+
+<div class="highlight"><pre><span class="n">STRONGHOLD_DEFAULTS</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+
+<p>You can add a tuple of url regexes in your settings file with the
+<code>STRONGHOLD_PUBLIC_URLS</code> setting. Any url that matches against these patterns
+ will be made public without using the <code>@public</code> decorator.</p>
+
+<h3>STRONGHOLD_PUBLIC_URLS</h3>
+
+<p><strong>Default</strong>:</p>
 
 <div class="highlight"><pre><span class="n">STRONGHOLD_PUBLIC_URLS</span> <span class="o">=</span> <span class="p">()</span>
 </pre></div>
 
-<p>Default setting when debug == True :</p>
+<p>If STRONGHOLD_DEFAULTS is True STRONGHOLD_PUBLIC_URLS contains:</p>
 
-<div class="highlight"><pre><span class="n">STRONGHOLD_PUBLIC_URLS</span> <span class="o">=</span> <span class="p">(</span><span class="s">r'^/static/.+$'</span><span class="p">,</span> <span class="s">r'^/media/.+$'</span><span class="p">)</span>
+<div class="highlight"><pre><span class="p">(</span>
+    <span class="s">r'^</span><span class="si">%s</span><span class="s">.+$'</span> <span class="o">%</span> <span class="n">settings</span><span class="o">.</span><span class="n">STATIC_URL</span><span class="p">,</span>
+    <span class="s">r'^</span><span class="si">%s</span><span class="s">.+$'</span> <span class="o">%</span> <span class="n">settings</span><span class="o">.</span><span class="n">MEDIA_URL</span><span class="p">,</span>
+<span class="p">)</span>
+
 </pre></div>
 
-<h2>Contribute</h2>
+<p>When settings.DEBUG = True. This is additive to your settings to support serving
+Static files and media files from the development server. It does not replace any
+settings you may have in <code>STRONGHOLD_PUBLIC_URLS</code>.</p>
+
+<blockquote>
+<p>Note: Public URL regexes are matched against <code>[HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info)</code></p>
+</blockquote>
+
+<h3>STRONGHOLD_NAMED_URLS</h3>
+
+<p>You can add a tuple of url names in your settings file with the
+<code>STRONGHOLD_NAMED_URLS</code> setting. Names in this setting will be reversed using
+<code>django.core.urlresolvers.reverse</code> and any url matching the output of the reverse
+call will be made public without using the <code>@public</code> decorator:</p>
+
+<p><strong>Default</strong>:</p>
+
+<div class="highlight"><pre><span class="n">STRONGHOLD_NAMED_URLS</span> <span class="o">=</span> <span class="p">()</span>
+</pre></div>
+
+<p>If STRONGHOLD_DEFAULTS is True additionally we search for <code>django.contrib.auth</code>
+if it exists, we add the login and logout view names to <code>STRONGHOLD_NAMED_URLS</code></p>
+
+<h2>Compatiblity</h2>
+
+<p>Test with:</p>
+
+<ul>
+<li>Django 1.4.x</li>
+<li>Django 1.5</li>
+</ul><h2>Contribute</h2>
 
 <p>See CONTRIBUTING.md</p>
       </section>
