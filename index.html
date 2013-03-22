@@ -137,20 +137,20 @@ settings you may have in <code>STRONGHOLD_PUBLIC_URLS</code>.</p>
 <p>Note: Public URL regexes are matched against <code>[HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info)</code></p>
 </blockquote>
 
-<h3>STRONGHOLD_NAMED_URLS</h3>
+<h3>STRONGHOLD_PUBLIC_NAMED_URLS</h3>
 
 <p>You can add a tuple of url names in your settings file with the
-<code>STRONGHOLD_NAMED_URLS</code> setting. Names in this setting will be reversed using
+<code>STRONGHOLD_PUBLIC_NAMED_URLS</code> setting. Names in this setting will be reversed using
 <code>django.core.urlresolvers.reverse</code> and any url matching the output of the reverse
 call will be made public without using the <code>@public</code> decorator:</p>
 
 <p><strong>Default</strong>:</p>
 
-<div class="highlight"><pre><span class="n">STRONGHOLD_NAMED_URLS</span> <span class="o">=</span> <span class="p">()</span>
+<div class="highlight"><pre><span class="n">STRONGHOLD_PUBLIC_NAMED_URLS</span> <span class="o">=</span> <span class="p">()</span>
 </pre></div>
 
 <p>If STRONGHOLD_DEFAULTS is True additionally we search for <code>django.contrib.auth</code>
-if it exists, we add the login and logout view names to <code>STRONGHOLD_NAMED_URLS</code></p>
+if it exists, we add the login and logout view names to <code>STRONGHOLD_PUBLIC_NAMED_URLS</code></p>
 
 <h2>Compatiblity</h2>
 
