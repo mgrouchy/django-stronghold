@@ -109,19 +109,19 @@ settings you may have in `STRONGHOLD_PUBLIC_URLS`.
 
 > Note: Public URL regexes are matched against `[HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info)`
 
-###STRONGHOLD_NAMED_URLS
+###STRONGHOLD_PUBLIC_NAMED_URLS
 You can add a tuple of url names in your settings file with the
-`STRONGHOLD_NAMED_URLS` setting. Names in this setting will be reversed using
+`STRONGHOLD_PUBLIC_NAMED_URLS` setting. Names in this setting will be reversed using
 `django.core.urlresolvers.reverse` and any url matching the output of the reverse
 call will be made public without using the `@public` decorator:
 
 **Default**:
 ```python
-STRONGHOLD_NAMED_URLS = ()
+STRONGHOLD_PUBLIC_NAMED_URLS = ()
 ```
 
 If STRONGHOLD_DEFAULTS is True additionally we search for `django.contrib.auth`
-if it exists, we add the login and logout view names to `STRONGHOLD_NAMED_URLS`
+if it exists, we add the login and logout view names to `STRONGHOLD_PUBLIC_NAMED_URLS`
 
 ##Compatiblity
 
