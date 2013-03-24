@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from stronghold import conf
+from stronghold import conf, utils
 
 
 class LoginRequiredMiddleware(object):
@@ -21,7 +21,7 @@ class LoginRequiredMiddleware(object):
             return None
 
         # if its a public view, don't process it
-        is_public = getattr(view_func, 'STRONGHOLD_IS_PUBLIC', None)
+        is_public = utils.is_view_func_public(view_func)
         if is_public:
             return None
 

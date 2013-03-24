@@ -1,4 +1,5 @@
 from functools import partial
+from stronghold.utils import set_view_func_public
 
 
 def public(function):
@@ -9,6 +10,6 @@ def public(function):
     orig_func = function
     while isinstance(orig_func, partial):
         orig_func = orig_func.func
-    orig_func.STRONGHOLD_IS_PUBLIC = True
+    set_view_func_public(orig_func)
 
     return function
