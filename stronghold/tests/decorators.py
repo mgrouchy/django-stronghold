@@ -1,6 +1,6 @@
 import functools
 
-from .. import decorators
+from stronghold import decorators
 
 from django.utils import unittest
 

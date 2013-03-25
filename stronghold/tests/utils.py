@@ -1,6 +1,6 @@
 import mock
 
-from .. import utils
+from stronghold import utils
 
 from django.utils import unittest
 
