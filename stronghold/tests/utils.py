@@ -1,5 +1,3 @@
-import mock
-
 from stronghold import utils
 
 from django.utils import unittest
@@ -18,6 +16,7 @@ class IsViewFuncPublicTests(unittest.TestCase):
     def test_False(self):
         def function():
             pass
+
         function.STRONGHOLD_IS_PUBLIC = False
 
         is_public = utils.is_view_func_public(function)
@@ -28,7 +27,7 @@ class IsViewFuncPublicTests(unittest.TestCase):
         def function():
             pass
         function.STRONGHOLD_IS_PUBLIC = True
-        
+
         is_public = utils.is_view_func_public(function)
 
         self.assertTrue(is_public)
