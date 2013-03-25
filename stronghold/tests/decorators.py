@@ -1,12 +1,34 @@
+import functools
+
+from .. import decorators
+
 from django.utils import unittest
 
-from stronghold.decorators import public
-from mock import Mock
 
+class StrongholdDecoratorTests(unittest.TestCase):
 
-class StrongholdDecoratorTestCase(unittest.TestCase):
     def test_public_decorator_sets_attr(self):
-        view_func = Mock()
-        view_func = public(view_func)
-        is_public = getattr(view_func, 'STRONGHOLD_IS_PUBLIC', None)
-        self.assertEqual(is_public, True)
+        @decorators.public
+        def function():
+            pass
+
+        self.assertTrue(function.STRONGHOLD_IS_PUBLIC)
+
+    def test_public_decorator_sets_attr_with_nested_decorators(self):
+        def stub_decorator(func):
+            return func
+        @decorators.public
+        @stub_decorator
+        def inner_function():
+            pass
+
+        self.assertTrue(inner_function.STRONGHOLD_IS_PUBLIC)
+
+    def test_public_decorator_works_with_partials(self):
+        def function():
+            pass
+        partial = functools.partial(function) 
+
+        decorators.public(partial)
+
+        self.assertTrue(function.STRONGHOLD_IS_PUBLIC)
