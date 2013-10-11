@@ -7,6 +7,8 @@ from django.conf import settings
 STRONGHOLD_PUBLIC_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_URLS', ())
 STRONGHOLD_DEFAULTS = getattr(settings, 'STRONGHOLD_DEFAULTS', True)
 STRONGHOLD_PUBLIC_NAMED_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_NAMED_URLS', ())
+STRONGHOLD_ONLY_STAFF = getattr(settings, 'STRONGHOLD_ONLY_STAFF', ())
+STRONGHOLD_ONLY_SUPERUSER = getattr(settings, 'STRONGHOLD_ONLY_SUPERUSER', ())
 
 if STRONGHOLD_DEFAULTS:
     if 'django.contrib.auth' in settings.INSTALLED_APPS:
