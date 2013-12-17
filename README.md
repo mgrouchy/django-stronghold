@@ -107,7 +107,7 @@ When settings.DEBUG = True. This is additive to your settings to support serving
 Static files and media files from the development server. It does not replace any
 settings you may have in `STRONGHOLD_PUBLIC_URLS`.
 
-> Note: Public URL regexes are matched against `[HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info)`
+> Note: Public URL regexes are matched against [HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info).
 
 ###STRONGHOLD_PUBLIC_NAMED_URLS
 You can add a tuple of url names in your settings file with the
