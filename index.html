@@ -32,7 +32,8 @@
       <section>
         <p><img src="https://travis-ci.org/mgrouchy/django-stronghold.png?branch=master" alt="travis"></p>
 
-<h1>Stronghold</h1>
+<h1>
+<a name="stronghold" class="anchor" href="#stronghold"><span class="octicon octicon-link"></span></a>Stronghold</h1>
 
 <p>Get inside your stronghold and make all your Django views default login_required</p>
 
@@ -40,16 +41,17 @@
 
 <p>WARNING: still in development, so some of the DEFAULTS and such will be changing without notice.</p>
 
-<h2>Installation</h2>
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Install via pip.</p>
 
-<div class="highlight"><pre>pip install django-stronghold
+<div class="highlight highlight-sh"><pre>pip install django-stronghold
 </pre></div>
 
 <p>Add stronghold to your INSTALLED_APPS in your Django settings file</p>
 
-<div class="highlight"><pre>
+<div class="highlight highlight-python"><pre>
 <span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
     <span class="c">#...</span>
     <span class="s">'stronghold'</span><span class="p">,</span>
@@ -58,21 +60,23 @@
 
 <p>Then add the stronghold middleware to your MIDDLEWARE_CLASSES in your Django settings file</p>
 
-<div class="highlight"><pre><span class="n">MIDDLEWARE_CLASSES</span> <span class="o">=</span> <span class="p">(</span>
+<div class="highlight highlight-python"><pre><span class="n">MIDDLEWARE_CLASSES</span> <span class="o">=</span> <span class="p">(</span>
     <span class="c">#...</span>
     <span class="s">'stronghold.middleware.LoginRequiredMiddleware'</span><span class="p">,</span>
 <span class="p">)</span>
 
 </pre></div>
 
-<h2>Usage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>If you followed the installation instructions now all your views are defaulting to require a login.
 To make a view public again you can use the public decorator provided in <code>stronghold.decorators</code> like so:</p>
 
-<h3>For function based views</h3>
+<h3>
+<a name="for-function-based-views" class="anchor" href="#for-function-based-views"><span class="octicon octicon-link"></span></a>For function based views</h3>
 
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">stronghold.decorators</span> <span class="kn">import</span> <span class="n">public</span>
+<div class="highlight highlight-python"><pre><span class="kn">from</span> <span class="nn">stronghold.decorators</span> <span class="kn">import</span> <span class="n">public</span>
 
 
 <span class="nd">@public</span>
@@ -82,9 +86,10 @@ To make a view public again you can use the public decorator provided in <code>s
 
 </pre></div>
 
-<h3>for class based views</h3>
+<h3>
+<a name="for-class-based-views" class="anchor" href="#for-class-based-views"><span class="octicon octicon-link"></span></a>for class based views</h3>
 
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.utils.decorators</span> <span class="kn">import</span> <span class="n">method_decorator</span>
+<div class="highlight highlight-python"><pre><span class="kn">from</span> <span class="nn">django.utils.decorators</span> <span class="kn">import</span> <span class="n">method_decorator</span>
 <span class="kn">from</span> <span class="nn">stronghold.decorators</span> <span class="kn">import</span> <span class="n">public</span>
 
 
@@ -98,31 +103,34 @@ To make a view public again you can use the public decorator provided in <code>s
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">SomeView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 
-<h2>Configuration (optional)</h2>
+<h2>
+<a name="configuration-optional" class="anchor" href="#configuration-optional"><span class="octicon octicon-link"></span></a>Configuration (optional)</h2>
 
-<h3>STRONGHOLD_DEFAULTS</h3>
+<h3>
+<a name="stronghold_defaults" class="anchor" href="#stronghold_defaults"><span class="octicon octicon-link"></span></a>STRONGHOLD_DEFAULTS</h3>
 
 <p>Use Strongholds defaults in addition to your own settings.</p>
 
 <p><strong>Default</strong>:</p>
 
-<div class="highlight"><pre><span class="n">STRONGHOLD_DEFAULTS</span> <span class="o">=</span> <span class="bp">True</span>
+<div class="highlight highlight-python"><pre><span class="n">STRONGHOLD_DEFAULTS</span> <span class="o">=</span> <span class="bp">True</span>
 </pre></div>
 
 <p>You can add a tuple of url regexes in your settings file with the
 <code>STRONGHOLD_PUBLIC_URLS</code> setting. Any url that matches against these patterns
  will be made public without using the <code>@public</code> decorator.</p>
 
-<h3>STRONGHOLD_PUBLIC_URLS</h3>
+<h3>
+<a name="stronghold_public_urls" class="anchor" href="#stronghold_public_urls"><span class="octicon octicon-link"></span></a>STRONGHOLD_PUBLIC_URLS</h3>
 
 <p><strong>Default</strong>:</p>
 
-<div class="highlight"><pre><span class="n">STRONGHOLD_PUBLIC_URLS</span> <span class="o">=</span> <span class="p">()</span>
+<div class="highlight highlight-python"><pre><span class="n">STRONGHOLD_PUBLIC_URLS</span> <span class="o">=</span> <span class="p">()</span>
 </pre></div>
 
 <p>If STRONGHOLD_DEFAULTS is True STRONGHOLD_PUBLIC_URLS contains:</p>
 
-<div class="highlight"><pre><span class="p">(</span>
+<div class="highlight highlight-python"><pre><span class="p">(</span>
     <span class="s">r'^</span><span class="si">%s</span><span class="s">.+$'</span> <span class="o">%</span> <span class="n">settings</span><span class="o">.</span><span class="n">STATIC_URL</span><span class="p">,</span>
     <span class="s">r'^</span><span class="si">%s</span><span class="s">.+$'</span> <span class="o">%</span> <span class="n">settings</span><span class="o">.</span><span class="n">MEDIA_URL</span><span class="p">,</span>
 <span class="p">)</span>
@@ -134,10 +142,11 @@ Static files and media files from the development server. It does not replace an
 settings you may have in <code>STRONGHOLD_PUBLIC_URLS</code>.</p>
 
 <blockquote>
-<p>Note: Public URL regexes are matched against <code>[HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info)</code></p>
+<p>Note: Public URL regexes are matched against <a href="https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info">HttpRequest.path_info</a>.</p>
 </blockquote>
 
-<h3>STRONGHOLD_PUBLIC_NAMED_URLS</h3>
+<h3>
+<a name="stronghold_public_named_urls" class="anchor" href="#stronghold_public_named_urls"><span class="octicon octicon-link"></span></a>STRONGHOLD_PUBLIC_NAMED_URLS</h3>
 
 <p>You can add a tuple of url names in your settings file with the
 <code>STRONGHOLD_PUBLIC_NAMED_URLS</code> setting. Names in this setting will be reversed using
@@ -146,25 +155,28 @@ call will be made public without using the <code>@public</code> decorator:</p>
 
 <p><strong>Default</strong>:</p>
 
-<div class="highlight"><pre><span class="n">STRONGHOLD_PUBLIC_NAMED_URLS</span> <span class="o">=</span> <span class="p">()</span>
+<div class="highlight highlight-python"><pre><span class="n">STRONGHOLD_PUBLIC_NAMED_URLS</span> <span class="o">=</span> <span class="p">()</span>
 </pre></div>
 
 <p>If STRONGHOLD_DEFAULTS is True additionally we search for <code>django.contrib.auth</code>
 if it exists, we add the login and logout view names to <code>STRONGHOLD_PUBLIC_NAMED_URLS</code></p>
 
-<h2>Compatiblity</h2>
+<h2>
+<a name="compatiblity" class="anchor" href="#compatiblity"><span class="octicon octicon-link"></span></a>Compatiblity</h2>
 
-<p>Test with:</p>
+<p>Tested with:</p>
 
 <ul>
 <li>Django 1.4.x</li>
-<li>Django 1.5</li>
-</ul><h2>Contribute</h2>
+<li>Django 1.5.x</li>
+<li>Django 1.6.x</li>
+</ul><h2>
+<a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h2>
 
 <p>See CONTRIBUTING.md</p>
       </section>
       <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
