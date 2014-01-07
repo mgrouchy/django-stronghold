@@ -33,7 +33,9 @@ for named_url in STRONGHOLD_PUBLIC_NAMED_URLS:
         url = reverse(named_url)
         named_urls.append(url)
     except NoReverseMatch:
-        print "Stronghold: Could not reverse Named URL: '%s'. Is it in your `urlpatterns`? Ignoring." % named_url
+        # print "Stronghold: Could not reverse Named URL: '%s'. Is it in your `urlpatterns`? Ignoring." % named_url
+        # ignore non-matches
+        pass
 
 
 STRONGHOLD_PUBLIC_URLS += tuple(['^%s$' % url for url in named_urls])
