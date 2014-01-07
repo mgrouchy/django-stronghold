@@ -12,7 +12,7 @@ test_dependencies = ['django>1.4.0']
 
 setup(
     name='django-stronghold',
-    version='0.2.3',
+    version='0.2.4',
     description='Get inside your stronghold and make all your Django views default login_required',
     url='https://github.com/mgrouchy/django-stronghold',
     author='Mike Grouchy',
