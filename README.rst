@@ -1,7 +1,6 @@
 .. figure:: https://travis-ci.org/mgrouchy/django-stronghold.png?branch=master
    :alt: travis
 
-   travis
 Stronghold
 ==========
 
