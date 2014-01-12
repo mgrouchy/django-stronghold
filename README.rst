@@ -146,7 +146,10 @@ names to ``STRONGHOLD_PUBLIC_NAMED_URLS``
 Compatiblity
 ------------
 
-Tested with: \* Django 1.4.x \* Django 1.5.x \* Django 1.6.x
+Tested with: 
+\* Django 1.4.x 
+\* Django 1.5.x 
+\* Django 1.6.x
 
 Contribute
 ----------
