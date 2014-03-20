@@ -30,5 +30,5 @@ class LoginRequiredMiddleware(object):
         return any(public_url.match(url) for public_url in self.public_view_urls)
 
     def is_public_named_url(self, request):
-        return request.resolver_match \
+        return hasattr(request, 'resolver_match') and request.resolver_match \
             and request.resolver_match.url_name in self.public_named_urls
