@@ -2,11 +2,14 @@ import re
 
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 
 STRONGHOLD_PUBLIC_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_URLS', ())
 STRONGHOLD_DEFAULTS = getattr(settings, 'STRONGHOLD_DEFAULTS', True)
 STRONGHOLD_PUBLIC_NAMED_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_NAMED_URLS', ())
+STRONGHOLD_PERMISSIONS_DECORATOR = getattr(settings, 'STRONGHOLD_PERMISSIONS_DECORATOR', login_required)
+
 
 if STRONGHOLD_DEFAULTS:
     if 'django.contrib.auth' in settings.INSTALLED_APPS:

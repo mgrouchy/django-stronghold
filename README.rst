@@ -143,13 +143,27 @@ If STRONGHOLD\_DEFAULTS is True additionally we search for
 ``django.contrib.auth`` if it exists, we add the login and logout view
 names to ``STRONGHOLD_PUBLIC_NAMED_URLS``
 
+STRONGHOLD\_PERMISSIONS\_DECORATOR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Optionally configure STRONGHOLD_PERMISSIONS_DECORATOR to be something besides
+``login_required``. This allows the developer to set this to an alternative
+decorator like ``staff_member_required`` or a user created decorator that
+processes a view function and returns ``None`` or a ``HTTPResponse``.
+
+**Default**:
+
+.. code:: python
+    STRONGHOLD_PERMISSIONS_DECORATOR = login_required
+
+
 Compatiblity
 ------------
 
-Tested with: 
+Tested with:
 
-- Django 1.4.x 
-- Django 1.5.x 
+- Django 1.4.x
+- Django 1.5.x
 - Django 1.6.x
 
 Contribute
