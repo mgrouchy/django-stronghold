@@ -1,10 +1,11 @@
-from django.contrib.auth.decorators import login_required
 from stronghold import conf, utils
 
 
 class LoginRequiredMiddleware(object):
     """
-    Force all views to use login required
+    Force all views to use the permissions defined by
+    STRONGHOLD_PERMISSIONS_DECORATOR. Default is login_required, but can use
+    staff_member_required or a user defined decorator
 
     View is deemed to be public if the @public decorator is applied to the view
 
@@ -22,7 +23,7 @@ class LoginRequiredMiddleware(object):
                 or self.is_public_url(request.path_info):
             return None
 
-        return login_required(view_func)(request, *view_args, **view_kwargs)
+        return conf.STRONGHOLD_PERMISSIONS_DECORATOR(view_func)(request, *view_args, **view_kwargs)
 
     def is_public_url(self, url):
         return any(public_url.match(url) for public_url in self.public_view_urls)

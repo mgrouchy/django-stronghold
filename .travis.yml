@@ -6,7 +6,6 @@ env:
   - DJANGO_VERSION=1.4.13
   - DJANGO_VERSION=1.5.8
   - DJANGO_VERSION=1.6.5
-  - DJANGO_VERSION=1.7b4
 install:
   - pip install -r requirements.txt
   - pip install Django==$DJANGO_VERSION
