@@ -1,6 +1,5 @@
 import re
 
-from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
@@ -31,22 +30,6 @@ if STRONGHOLD_DEFAULTS:
 
         if media_url:
             STRONGHOLD_PUBLIC_URLS += (r'^%s.+$' % media_url, )
-
-# named urls can be unsafe if a user puts the wrong url in. Right now urls that
-# dont reverse are just ignored with a warning. Maybe in the future make this
-# so it breaks?
-named_urls = []
-for named_url in STRONGHOLD_PUBLIC_NAMED_URLS:
-    try:
-        url = reverse(named_url)
-        named_urls.append(url)
-    except NoReverseMatch:
-        # print "Stronghold: Could not reverse Named URL: '%s'. Is it in your `urlpatterns`? Ignoring." % named_url
-        # ignore non-matches
-        pass
-
-
-STRONGHOLD_PUBLIC_URLS += tuple(['^%s$' % url for url in named_urls])
 
 if STRONGHOLD_PUBLIC_URLS:
     STRONGHOLD_PUBLIC_URLS = [re.compile(v) for v in STRONGHOLD_PUBLIC_URLS]

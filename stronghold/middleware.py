@@ -17,9 +17,11 @@ class LoginRequiredMiddleware(object):
 
     def __init__(self, *args, **kwargs):
         self.public_view_urls = getattr(conf, 'STRONGHOLD_PUBLIC_URLS', ())
+        self.public_named_urls = getattr(conf, 'STRONGHOLD_PUBLIC_NAMED_URLS', ())
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         if request.user.is_authenticated() or utils.is_view_func_public(view_func) \
+                or self.is_public_named_url(request) \
                 or self.is_public_url(request.path_info):
             return None
 
@@ -27,3 +29,7 @@ class LoginRequiredMiddleware(object):
 
     def is_public_url(self, url):
         return any(public_url.match(url) for public_url in self.public_view_urls)
+
+    def is_public_named_url(self, request):
+        return hasattr(request, 'resolver_match') and request.resolver_match \
+            and request.resolver_match.url_name in self.public_named_urls

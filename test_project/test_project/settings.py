@@ -2,6 +2,16 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+# django-stronghold settings
+STRONGHOLD_PUBLIC_URLS = (
+    '/public_url/',
+)
+
+STRONGHOLD_PUBLIC_NAMED_URLS = (
+    'public_named_url',
+    'public_named_url_params',
+)
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )

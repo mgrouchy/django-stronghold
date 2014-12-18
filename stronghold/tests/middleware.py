@@ -1,7 +1,6 @@
 import mock
 import re
 
-from stronghold import conf
 from stronghold.middleware import LoginRequiredMiddleware
 
 from django.core.urlresolvers import reverse
@@ -12,13 +11,52 @@ from django.test.client import RequestFactory
 
 class StrongholdMiddlewareTestCase(TestCase):
 
-    def test_public_view_is_public(self):
-        response = self.client.get(reverse('public_view'))
+    def test_public_view_is_public_decorator(self):
+        """
+        Test that a view made public using decorator
+        does not redirect to login.
+        """
+        response = self.client.get(reverse('public_decorator'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_public_view_is_public_url(self):
+        """
+        Test that a view made public using STRONGHOLD_PUBLIC_URLS
+        setting does not redirect to login.
+        """
+        response = self.client.get(reverse('public_url'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_public_view_is_public_named_url(self):
+        """
+        Test that a view made public using STRONGHOLD_PUBLIC_NAMED_URLS
+        setting does not redirect to login.
+        """
+        response = self.client.get(reverse('public_named_url'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_public_view_is_public_named_url_with_params(self):
+        """
+        Test that a view made public using STRONGHOLD_PUBLIC_NAMED_URLS
+        setting does not redirect to login, even if it includes params.
+        """
+        response = self.client.get(
+            reverse('public_named_url_params', args=['some_text', ])
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_private_view_is_private(self):
+        """
+        Test that view that is not explicitly made public
+        redirects to login.
+        """
         response = self.client.get(reverse('protected_view'))
         self.assertEqual(response.status_code, 302)
+        self.assertTrue(
+            response['Location'].endswith(
+                '/accounts/login/?next=/protected/'
+            )
+        )
 
 
 class LoginRequiredMiddlewareTests(TestCase):
