@@ -14,6 +14,11 @@ STRONGHOLD_PERMISSIONS_DECORATOR = getattr(settings, 'STRONGHOLD_PERMISSIONS_DEC
 if STRONGHOLD_DEFAULTS:
     if 'django.contrib.auth' in settings.INSTALLED_APPS:
         STRONGHOLD_PUBLIC_NAMED_URLS += ('login', 'logout')
+    
+    # Do not login protect the logout url, causes an infinite loop
+    logout_url = getattr(settings, 'LOGOUT_URL', None)
+    if logout_url:
+        STRONGHOLD_PUBLIC_URLS += (r'^%s.+$' % logout_url, )
 
     if settings.DEBUG:
         # In Debug mode we serve the media urls as public by default as a
