@@ -1,3 +1,3 @@
-from stronghold.tests.decorators import *
-from stronghold.tests.middleware import *
-from stronghold.tests.utils import *
+from stronghold.tests.testdecorators import *
+from stronghold.tests.testmiddleware import *
+from stronghold.tests.testutils import *
