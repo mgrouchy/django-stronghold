@@ -4,16 +4,19 @@ python:
   - "2.7"
   - "3.4"
 env:
-  - DJANGO_VERSION=1.4.13
-  - DJANGO_VERSION=1.5.8
-  - DJANGO_VERSION=1.6.5
-  - DJANGO_VERSION=1.7.1
+  - DJANGO_VERSION=1.4.20
+  - DJANGO_VERSION=1.5.12
+  - DJANGO_VERSION=1.6.11
+  - DJANGO_VERSION=1.7.7
+  - DJANGO_VERSION=1.8
 matrix:
   exclude:
     - python: "2.6"
-      env: DJANGO_VERSION=1.7.1
+      env: DJANGO_VERSION=1.7.7
+    - python: "2.6"
+      env: DJANGO_VERSION=1.8
     - python: "3.4"
-      env: DJANGO_VERSION=1.4.13
+      env: DJANGO_VERSION=1.4.20
 install:
   - pip install -r requirements.txt
   - pip install Django==$DJANGO_VERSION
