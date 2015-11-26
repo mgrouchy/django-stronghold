@@ -53,7 +53,7 @@ def someview(request):
 
 ```
 
-###for class based views
+###for class based views (decorator)
 
 ```python
 from django.utils.decorators import method_decorator
@@ -68,6 +68,16 @@ class SomeView(View):
 	@method_decorator(public)
 	def dispatch(self, *args, **kwargs):
     	return super(SomeView, self).dispatch(*args, **kwargs)
+```
+
+###for class based views (mixin)
+
+```python
+from stronghold.views import StrongholdPublicMixin
+
+
+class SomeView(StrongholdPublicMixin, View):
+	pass
 ```
 
 ##Configuration (optional)
