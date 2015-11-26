@@ -62,8 +62,8 @@ For function based views
         # do some work
         #...
 
-for class based views
-~~~~~~~~~~~~~~~~~~~~~
+for class based views (decorator)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -79,6 +79,16 @@ for class based views
         @method_decorator(public)
         def dispatch(self, *args, **kwargs):
             return super(SomeView, self).dispatch(*args, **kwargs)
+
+for class based views (mixin)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    from stronghold import StrongholdPublicMixin
+
+    class SomeView(StrongholdPublicMixin, View):
+        pass
 
 Configuration (optional)
 ------------------------
