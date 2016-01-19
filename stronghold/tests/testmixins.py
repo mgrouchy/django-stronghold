@@ -1,8 +1,13 @@
 from stronghold.views import StrongholdPublicMixin
 
-from django.utils import unittest
+import django
 from django.views.generic import View
 from django.views.generic.base import TemplateResponseMixin
+
+if django.VERSION[:2] < (1, 9):
+    from django.utils import unittest
+else:
+    import unittest
 
 
 class StrongholdMixinsTests(unittest.TestCase):
