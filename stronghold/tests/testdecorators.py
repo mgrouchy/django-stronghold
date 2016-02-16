@@ -2,7 +2,11 @@ import functools
 
 from stronghold import decorators
 
-from django.utils import unittest
+import django
+if django.VERSION[:2] < (1, 9):
+    from django.utils import unittest
+else:
+    import unittest
 
 
 class StrongholdDecoratorTests(unittest.TestCase):
