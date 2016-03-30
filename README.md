@@ -1,4 +1,4 @@
-![travis](https://travis-ci.org/mgrouchy/django-stronghold.png?branch=master)
+[![Build Status](https://travis-ci.org/mgrouchy/django-stronghold.svg?branch=master)](https://travis-ci.org/mgrouchy/django-stronghold)
 
 #Stronghold
 
