@@ -8,13 +8,17 @@ from django.contrib.auth.decorators import login_required
 STRONGHOLD_PUBLIC_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_URLS', ())
 STRONGHOLD_DEFAULTS = getattr(settings, 'STRONGHOLD_DEFAULTS', True)
 STRONGHOLD_PUBLIC_NAMED_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_NAMED_URLS', ())
-STRONGHOLD_PERMISSIONS_DECORATOR = getattr(settings, 'STRONGHOLD_PERMISSIONS_DECORATOR', login_required)
+STRONGHOLD_USER_TEST_FUNC = getattr(
+    settings,
+    'STRONGHOLD_USER_TEST_FUNC',
+    lambda u: u.is_authenticated()
+)
 
 
 if STRONGHOLD_DEFAULTS:
     if 'django.contrib.auth' in settings.INSTALLED_APPS:
         STRONGHOLD_PUBLIC_NAMED_URLS += ('login', 'logout')
-    
+
     # Do not login protect the logout url, causes an infinite loop
     logout_url = getattr(settings, 'LOGOUT_URL', None)
     if logout_url:
