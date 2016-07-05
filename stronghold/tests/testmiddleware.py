@@ -65,3 +65,19 @@ class LoginRequiredMiddlewareTests(TestCase):
         response = self.middleware.process_view(**self.kwargs)
 
         self.assertEqual(response, None)
+
+    def test_redirects_to_login_when_not_passing_custom_test(self):
+        with mock.patch('stronghold.conf.STRONGHOLD_USER_TEST_FUNC', lambda u: u.is_staff):
+            self.request.user.is_staff = False
+
+            response = self.middleware.process_view(**self.kwargs)
+
+            self.assertEqual(response.status_code, 302)
+
+    def test_returns_none_when_passing_custom_test(self):
+        with mock.patch('stronghold.conf.STRONGHOLD_USER_TEST_FUNC', lambda u: u.is_staff):
+            self.request.user.is_staff = True
+
+            response = self.middleware.process_view(**self.kwargs)
+
+            self.assertEqual(response, None)
