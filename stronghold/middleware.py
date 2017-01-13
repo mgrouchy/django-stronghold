@@ -1,8 +1,13 @@
 from django.contrib.auth.decorators import user_passes_test
 from stronghold import conf, utils
 
+try:
+    from django.utils.deprecation import MiddlewareMixin
+except ImportError:
+    MiddlewareMixin = object
 
-class LoginRequiredMiddleware(object):
+
+class LoginRequiredMiddleware(MiddlewareMixin):
     """
     Restrict access to users that for which STRONGHOLD_USER_TEST_FUNC returns
     True. Default is to check if the user is authenticated.
@@ -16,6 +21,8 @@ class LoginRequiredMiddleware(object):
     """
 
     def __init__(self, *args, **kwargs):
+        if MiddlewareMixin != object:
+            super(LoginRequiredMiddleware, self).__init__(*args, **kwargs)
         self.public_view_urls = getattr(conf, 'STRONGHOLD_PUBLIC_URLS', ())
 
     def process_view(self, request, view_func, view_args, view_kwargs):
