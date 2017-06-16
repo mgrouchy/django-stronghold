@@ -65,6 +65,8 @@ MIDDLEWARE_CLASSES = (
     'stronghold.middleware.LoginRequiredMiddleware',
 )
 
+MIDDLEWARE = MIDDLEWARE_CLASSES
+
 ROOT_URLCONF = 'test_project.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
