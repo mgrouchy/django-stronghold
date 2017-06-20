@@ -4,34 +4,52 @@ python:
   - "2.7"
   - "3.4"
   - "3.5"
+  - "3.6"
 env:
-  - DJANGO_VERSION=1.4.13
-  - DJANGO_VERSION=1.5.8
-  - DJANGO_VERSION=1.6.5
-  - DJANGO_VERSION=1.7.1
-  - DJANGO_VERSION=1.8.8
-  - DJANGO_VERSION=1.9.1
-  - DJANGO_VERSION=1.10
+  - DJANGO_VERSION=1.4.22
+  - DJANGO_VERSION=1.5.12
+  - DJANGO_VERSION=1.6.11
+  - DJANGO_VERSION=1.7.11
+  - DJANGO_VERSION=1.8.18
+  - DJANGO_VERSION=1.9.13
+  - DJANGO_VERSION=1.10.7
+  - DJANGO_VERSION=1.11.2
 matrix:
   exclude:
     - python: "2.6"
-      env: DJANGO_VERSION=1.7.1
+      env: DJANGO_VERSION=1.7.11
     - python: "2.6"
-      env: DJANGO_VERSION=1.8.8
+      env: DJANGO_VERSION=1.8.18
     - python: "2.6"
       env: DJANGO_VERSION=1.9.1
     - python: "2.6"
-      env: DJANGO_VERSION=1.10
+      env: DJANGO_VERSION=1.10.7
+    - python: "2.6"
+      env: DJANGO_VERSION=1.11.2
     - python: "3.4"
-      env: DJANGO_VERSION=1.4.13
+      env: DJANGO_VERSION=1.4.22
+    - python: "3.4"
+      env: DJANGO_VERSION=1.5.12
+    - python: "3.4"
+      env: DJANGO_VERSION=1.6.11
+    - python: "3.4"
+      env: DJANGO_VERSION=1.7.11
     - python: "3.5"
-      env: DJANGO_VERSION=1.4.13
+      env: DJANGO_VERSION=1.4.22
     - python: "3.5"
-      env: DJANGO_VERSION=1.5.8
+      env: DJANGO_VERSION=1.5.12
     - python: "3.5"
-      env: DJANGO_VERSION=1.6.5
+      env: DJANGO_VERSION=1.6.11
     - python: "3.5"
-      env: DJANGO_VERSION=1.7.1
+      env: DJANGO_VERSION=1.7.11
+    - python: "3.6"
+      env: DJANGO_VERSION=1.4.22
+    - python: "3.6"
+      env: DJANGO_VERSION=1.5.12
+    - python: "3.6"
+      env: DJANGO_VERSION=1.6.11
+    - python: "3.6"
+      env: DJANGO_VERSION=1.7.11
 install:
   - pip install -r requirements.txt
   - pip install Django==$DJANGO_VERSION
