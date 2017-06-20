@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/mgrouchy/django-stronghold.svg?branch=master)](https://travis-ci.org/mgrouchy/django-stronghold)
 
-#Stronghold
+# Stronghold
 
 Get inside your stronghold and make all your Django views default login_required
 
@@ -8,7 +8,7 @@ Stronghold is a very small and easy to use django app that makes all your Django
 
 WARNING: still in development, so some of the DEFAULTS and such will be changing without notice.
 
-##Installation
+## Installation
 
 Install via pip.
 
@@ -36,12 +36,12 @@ MIDDLEWARE_CLASSES = (
 
 ```
 
-##Usage
+## Usage
 
 If you followed the installation instructions now all your views are defaulting to require a login.
 To make a view public again you can use the public decorator provided in `stronghold.decorators` like so:
 
-###For function based views
+### For function based views
 ```python
 from stronghold.decorators import public
 
@@ -53,7 +53,7 @@ def someview(request):
 
 ```
 
-###for class based views (decorator)
+### For class based views (decorator)
 
 ```python
 from django.utils.decorators import method_decorator
@@ -70,7 +70,7 @@ class SomeView(View):
     	return super(SomeView, self).dispatch(*args, **kwargs)
 ```
 
-###for class based views (mixin)
+### For class based views (mixin)
 
 ```python
 from stronghold.views import StrongholdPublicMixin
@@ -80,10 +80,10 @@ class SomeView(StrongholdPublicMixin, View):
 	pass
 ```
 
-##Configuration (optional)
+## Configuration (optional)
 
 
-###STRONGHOLD_DEFAULTS
+### STRONGHOLD_DEFAULTS
 
 Use Strongholds defaults in addition to your own settings.
 
@@ -98,7 +98,7 @@ You can add a tuple of url regexes in your settings file with the
  will be made public without using the `@public` decorator.
 
 
-###STRONGHOLD_PUBLIC_URLS
+### STRONGHOLD_PUBLIC_URLS
 
 **Default**:
 ```python
@@ -119,7 +119,7 @@ settings you may have in `STRONGHOLD_PUBLIC_URLS`.
 
 > Note: Public URL regexes are matched against [HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info).
 
-###STRONGHOLD_PUBLIC_NAMED_URLS
+### STRONGHOLD_PUBLIC_NAMED_URLS
 You can add a tuple of url names in your settings file with the
 `STRONGHOLD_PUBLIC_NAMED_URLS` setting. Names in this setting will be reversed using
 `django.core.urlresolvers.reverse` and any url matching the output of the reverse
@@ -133,15 +133,22 @@ STRONGHOLD_PUBLIC_NAMED_URLS = ()
 If STRONGHOLD_DEFAULTS is True additionally we search for `django.contrib.auth`
 if it exists, we add the login and logout view names to `STRONGHOLD_PUBLIC_NAMED_URLS`
 
-###STRONGHOLD_PERMISSIONS_DECORATOR
-Optionally configure STRONGHOLD_PERMISSIONS_DECORATOR to be something besides
-`login_required`. This allows the developer to set this to an alternative
-decorator like `staff_member_required` or a user created decorator that
-processes a view function and returns `None` or a `HTTPResponse`.
+### STRONGHOLD_USER_TEST_FUNC
+Optionally, set STRONGHOLD_USER_TEST_FUNC to a callable to limit access to users
+that pass a custom test. The callback receives a `User` object and should
+return `True` if the user is authorized. This is equivalent to decorating a
+view with `user_passes_test`.
+
+**Example**:
+
+```python
+STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_staff
+```
 
 **Default**:
+
 ```python
-STRONGHOLD_PERMISSIONS_DECORATOR = login_required
+STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_authenticated()
 ```
 
 ##Compatiblity
@@ -153,7 +160,8 @@ Tested with:
 * Django 1.7.x
 * Django 1.8.x
 * Django 1.9.x
+* Django 1.10.x
 
-##Contribute
+## Contribute
 
 See CONTRIBUTING.md

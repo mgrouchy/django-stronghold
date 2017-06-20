@@ -153,18 +153,22 @@ If STRONGHOLD\_DEFAULTS is True additionally we search for
 ``django.contrib.auth`` if it exists, we add the login and logout view
 names to ``STRONGHOLD_PUBLIC_NAMED_URLS``
 
-STRONGHOLD\_PERMISSIONS\_DECORATOR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STRONGHOLD\_USER\_TEST\_FUNC
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Optionally, set STRONGHOLD_USER_TEST_FUNC to a callable to limit access to users
+that pass a custom test. The callback receives a ``User`` object and should
+return ``True`` if the user is authorized. This is equivalent to decorating a
+view with ``user_passes_test``.
 
-Optionally configure STRONGHOLD_PERMISSIONS_DECORATOR to be something besides
-``login_required``. This allows the developer to set this to an alternative
-decorator like ``staff_member_required`` or a user created decorator that
-processes a view function and returns ``None`` or a ``HTTPResponse``.
+**Example**:
+
+.. code:: python
+    STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_staff
 
 **Default**:
 
 .. code:: python
-    STRONGHOLD_PERMISSIONS_DECORATOR = login_required
+    STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_authenticated()
 
 
 Compatiblity
@@ -178,6 +182,7 @@ Tested with:
 - Django 1.7.x
 - Django 1.8.x
 - Django 1.9.x
+- Django 1.10.x
 
 Contribute
 ----------
