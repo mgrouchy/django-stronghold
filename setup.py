@@ -25,7 +25,7 @@ setup(
     install_requires=dependencies,
     tests_require=test_dependencies,
     long_description=open('README.rst').read(),
-    classifiers=(
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Natural Language :: English',
@@ -36,5 +36,5 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
-    ),
+    ],
 )
