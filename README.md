@@ -151,7 +151,7 @@ STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_staff
 STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_authenticated()
 ```
 
-##Compatiblity
+## Compatiblity
 
 Tested with:
 * Django 1.4.x
