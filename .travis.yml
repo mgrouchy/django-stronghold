@@ -28,6 +28,6 @@ matrix:
       env: DJANGO_VERSION="django<1.11"
 install:
   - pip install -r requirements.txt
-  - pip install Django==$DJANGO_VERSION
+  - pip install $DJANGO_VERSION
   - python setup.py install
 script: make test
