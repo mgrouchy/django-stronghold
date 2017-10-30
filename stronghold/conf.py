@@ -11,7 +11,7 @@ STRONGHOLD_PUBLIC_NAMED_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_NAMED_URLS',
 STRONGHOLD_USER_TEST_FUNC = getattr(
     settings,
     'STRONGHOLD_USER_TEST_FUNC',
-    lambda u: u.is_authenticated()
+    lambda u: u.is_authenticated
 )
 
 

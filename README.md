@@ -148,7 +148,7 @@ STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_staff
 **Default**:
 
 ```python
-STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_authenticated()
+STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_authenticated
 ```
 
 ##Compatiblity
