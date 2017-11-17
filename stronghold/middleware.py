@@ -26,9 +26,9 @@ class LoginRequiredMiddleware(MiddlewareMixin):
         self.public_view_urls = getattr(conf, 'STRONGHOLD_PUBLIC_URLS', ())
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        if conf.STRONGHOLD_USER_TEST_FUNC(request.user) \
-                or utils.is_view_func_public(view_func) \
-                or self.is_public_url(request.path_info):
+        if utils.is_view_func_public(view_func) \
+                or self.is_public_url(request.path_info) \
+                or conf.STRONGHOLD_USER_TEST_FUNC(request.user):
             return None
 
         decorator = user_passes_test(conf.STRONGHOLD_USER_TEST_FUNC)
