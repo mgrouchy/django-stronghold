@@ -4,7 +4,11 @@ import re
 from stronghold import conf
 from stronghold.middleware import LoginRequiredMiddleware
 
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
+
 from django.http import HttpResponse
 from django.test import TestCase
 from django.test.client import RequestFactory
