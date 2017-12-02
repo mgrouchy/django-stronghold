@@ -168,7 +168,7 @@ view with ``user_passes_test``.
 **Default**:
 
 .. code:: python
-    STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_authenticated()
+    STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_authenticated
 
 
 Compatiblity
@@ -183,6 +183,8 @@ Tested with:
 - Django 1.8.x
 - Django 1.9.x
 - Django 1.10.x
+- Django 1.11.x
+- Django 2.0.x
 
 Contribute
 ----------
