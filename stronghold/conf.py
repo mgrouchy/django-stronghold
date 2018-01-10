@@ -1,18 +1,24 @@
 import re
 
-from django.core.urlresolvers import reverse, NoReverseMatch
+try:
+    from django.urls import reverse, NoReverseMatch
+except ImportError:
+    from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-
 
 STRONGHOLD_PUBLIC_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_URLS', ())
 STRONGHOLD_DEFAULTS = getattr(settings, 'STRONGHOLD_DEFAULTS', True)
 STRONGHOLD_PUBLIC_NAMED_URLS = getattr(settings, 'STRONGHOLD_PUBLIC_NAMED_URLS', ())
-STRONGHOLD_USER_TEST_FUNC = getattr(
-    settings,
-    'STRONGHOLD_USER_TEST_FUNC',
-    lambda u: u.is_authenticated()
-)
+
+def is_authenticated(user):
+    """ make compatible with django 1 and 2 """
+    try:
+        return user.is_authenticated()
+    except TypeError:
+        return user.is_authenticated
+
+STRONGHOLD_USER_TEST_FUNC = getattr(settings, 'STRONGHOLD_USER_TEST_FUNC', is_authenticated)
 
 
 if STRONGHOLD_DEFAULTS:
