@@ -32,18 +32,6 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
-# Additional locations of static files
-STATICFILES_DIRS = (
-)
-
-# List of finder classes that know how to find static files in
-# various locations.
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
-
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'dq73h&amp;uf%a5p(*ns7*!y&amp;7f=)lnn(#aoax_1$e*j)2ziy9b3^!'
 
@@ -112,11 +100,3 @@ LOGGING = {
         },
     }
 }
-
-
-import django
-
-if django.VERSION[:2] < (1, 6):
-    TEST_RUNNER = 'discover_runner.DiscoverRunner'
-else:
-    TEST_RUNNER = 'django.test.runner.DiscoverRunner'

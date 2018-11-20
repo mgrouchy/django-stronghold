@@ -8,7 +8,7 @@ except ImportError:
 
 
 dependencies = []
-test_dependencies = ['django>1.4.0']
+test_dependencies = ['django>1.8.0']
 
 setup(
     name='django-stronghold',
@@ -31,7 +31,6 @@ setup(
         'Natural Language :: English',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',

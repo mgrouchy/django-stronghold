@@ -176,10 +176,6 @@ Compatiblity
 
 Tested with:
 
-- Django 1.4.x
-- Django 1.5.x
-- Django 1.6.x
-- Django 1.7.x
 - Django 1.8.x
 - Django 1.9.x
 - Django 1.10.x
