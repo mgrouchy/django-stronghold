@@ -10,6 +10,13 @@ def public(function):
     orig_func = function
     while isinstance(orig_func, partial):
         orig_func = orig_func.func
+    if hasattr(orig_func, "__self__"):
+        def bound_method(*args, **kwargs):
+            return orig_func.__get__(orig_func.__self__, type(orig_func.__self__))(*args, **kwargs)
+        
+        set_view_func_public(bound_method)
+        return bound_method
+
     set_view_func_public(orig_func)
 
     return function

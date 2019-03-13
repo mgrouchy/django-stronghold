@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 
 from stronghold.decorators import public
+from stronghold.views import StrongholdPublicMixin
 
 
 class ProtectedView(View):
@@ -19,3 +20,13 @@ class PublicView(View):
 
     def get(self, request, *args, **kwargs):
         return HttpResponse("PublicView")
+
+class PublicView2(StrongholdPublicMixin, View):
+    """ A view we want to be public, using the StrongholdPublicMixin"""
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("PublicView")
+
+@public
+def public_view3(request):
+    """ A function view we want to be public"""
+    return HttpResponse("PublicView")
