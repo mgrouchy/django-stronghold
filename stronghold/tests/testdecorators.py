@@ -46,15 +46,3 @@ class StrongholdDecoratorTests(unittest.TestCase):
                 pass
 
         self.assertTrue(TestClass.function.STRONGHOLD_IS_PUBLIC)
-
-    def test_public_method_decorator_works_with_partials(self):
-        def partial_decorator(func):
-            return functools.partial(func)
-
-        class TestClass:
-            @method_decorator(decorators.public)
-            @method_decorator(partial_decorator)
-            def function(self):
-                pass
-        
-        self.assertTrue(TestClass.function.STRONGHOLD_IS_PUBLIC)
