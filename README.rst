@@ -181,6 +181,8 @@ Tested with:
 - Django 1.10.x
 - Django 1.11.x
 - Django 2.0.x
+- Django 2.1.x
+- Django 2.2.x
 
 Contribute
 ----------

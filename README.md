@@ -42,6 +42,7 @@ If you followed the installation instructions now all your views are defaulting 
 To make a view public again you can use the public decorator provided in `stronghold.decorators` like so:
 
 ### For function based views
+
 ```python
 from stronghold.decorators import public
 
@@ -82,7 +83,6 @@ class SomeView(StrongholdPublicMixin, View):
 
 ## Configuration (optional)
 
-
 ### STRONGHOLD_DEFAULTS
 
 Use Strongholds defaults in addition to your own settings.
@@ -95,17 +95,18 @@ STRONGHOLD_DEFAULTS = True
 
 You can add a tuple of url regexes in your settings file with the
 `STRONGHOLD_PUBLIC_URLS` setting. Any url that matches against these patterns
- will be made public without using the `@public` decorator.
-
+will be made public without using the `@public` decorator.
 
 ### STRONGHOLD_PUBLIC_URLS
 
 **Default**:
+
 ```python
 STRONGHOLD_PUBLIC_URLS = ()
 ```
 
 If STRONGHOLD_DEFAULTS is True STRONGHOLD_PUBLIC_URLS contains:
+
 ```python
 (
     r'^%s.+$' % settings.STATIC_URL,
@@ -113,6 +114,7 @@ If STRONGHOLD_DEFAULTS is True STRONGHOLD_PUBLIC_URLS contains:
 )
 
 ```
+
 When settings.DEBUG = True. This is additive to your settings to support serving
 Static files and media files from the development server. It does not replace any
 settings you may have in `STRONGHOLD_PUBLIC_URLS`.
@@ -120,12 +122,14 @@ settings you may have in `STRONGHOLD_PUBLIC_URLS`.
 > Note: Public URL regexes are matched against [HttpRequest.path_info](https://docs.djangoproject.com/en/dev/ref/request-response/#django.http.HttpRequest.path_info).
 
 ### STRONGHOLD_PUBLIC_NAMED_URLS
+
 You can add a tuple of url names in your settings file with the
 `STRONGHOLD_PUBLIC_NAMED_URLS` setting. Names in this setting will be reversed using
 `django.core.urlresolvers.reverse` and any url matching the output of the reverse
 call will be made public without using the `@public` decorator:
 
 **Default**:
+
 ```python
 STRONGHOLD_PUBLIC_NAMED_URLS = ()
 ```
@@ -134,6 +138,7 @@ If STRONGHOLD_DEFAULTS is True additionally we search for `django.contrib.auth`
 if it exists, we add the login and logout view names to `STRONGHOLD_PUBLIC_NAMED_URLS`
 
 ### STRONGHOLD_USER_TEST_FUNC
+
 Optionally, set STRONGHOLD_USER_TEST_FUNC to a callable to limit access to users
 that pass a custom test. The callback receives a `User` object and should
 return `True` if the user is authorized. This is equivalent to decorating a
@@ -154,11 +159,14 @@ STRONGHOLD_USER_TEST_FUNC = lambda user: user.is_authenticated
 ## Compatiblity
 
 Tested with:
-* Django 1.8.x
-* Django 1.9.x
-* Django 1.10.x
-* Django 1.11.x
-* Django 2.0.x
+
+- Django 1.8.x
+- Django 1.9.x
+- Django 1.10.x
+- Django 1.11.x
+- Django 2.0.x
+- Django 2.1.x
+- Django 2.2.x
 
 ## Contribute
 
