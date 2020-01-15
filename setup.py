@@ -12,7 +12,7 @@ test_dependencies = ["django>1.8.0"]
 
 setup(
     name="django-stronghold",
-    version="0.3.1",
+    version="0.3.2",
     description="Get inside your stronghold and make all your Django views default login_required",
     url="https://github.com/mgrouchy/django-stronghold",
     author="Mike Grouchy",
@@ -21,7 +21,8 @@ setup(
     license="MIT license",
     install_requires=dependencies,
     tests_require=test_dependencies,
-    long_description=open("README.rst").read(),
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
