@@ -12,7 +12,7 @@ STRONGHOLD_DEFAULTS = getattr(settings, "STRONGHOLD_DEFAULTS", True)
 STRONGHOLD_PUBLIC_NAMED_URLS = getattr(settings, "STRONGHOLD_PUBLIC_NAMED_URLS", ())
 
 
-def is_authenticated(user):
+def is_authenticated(user) -> bool:
     """ make compatible with django 1 and 2 """
     try:
         return user.is_authenticated()
@@ -20,8 +20,18 @@ def is_authenticated(user):
         return user.is_authenticated
 
 
-STRONGHOLD_USER_TEST_FUNC = getattr(settings, "STRONGHOLD_USER_TEST_FUNC", is_authenticated)
+def test_request(request, view_func, view_args, view_kwargs) -> bool:
+    """
+    Default test against request in middleware. 
+    
+    Set this in STRONGHOLD_USER_TEST_FUNC in your django.conf.settings if you 
+    want to use the request details to deny permission. 
+    """
+    return True
 
+
+STRONGHOLD_USER_TEST_FUNC = getattr(settings, "STRONGHOLD_USER_TEST_FUNC", is_authenticated)
+STRONGHOLD_TEST_REQUEST_FUNC = getattr(settings, "STRONGHOLD_TEST_REQUEST_FUNC", test_request)
 
 if STRONGHOLD_DEFAULTS:
     if "django.contrib.auth" in settings.INSTALLED_APPS:
