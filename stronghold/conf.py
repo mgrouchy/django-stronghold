@@ -20,8 +20,18 @@ def is_authenticated(user):
         return user.is_authenticated
 
 
-STRONGHOLD_USER_TEST_FUNC = getattr(settings, "STRONGHOLD_USER_TEST_FUNC", is_authenticated)
+def test_request(request, view_func, view_args, view_kwargs):
+    """
+    Default test against request in middleware. 
+    
+    Set this in STRONGHOLD_USER_TEST_FUNC in your django.conf.settings if you 
+    want to use the request details to deny permission. 
+    """
+    return True
 
+
+STRONGHOLD_USER_TEST_FUNC = getattr(settings, "STRONGHOLD_USER_TEST_FUNC", is_authenticated)
+STRONGHOLD_REQUEST_TEST_FUNC = getattr(settings, "STRONGHOLD_REQUEST_TEST_FUNC", test_request)
 
 if STRONGHOLD_DEFAULTS:
     if "django.contrib.auth" in settings.INSTALLED_APPS:
