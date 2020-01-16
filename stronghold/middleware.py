@@ -28,7 +28,7 @@ class LoginRequiredMiddleware(MiddlewareMixin):
     def process_view(self, request, view_func, view_args, view_kwargs):
         if (
             conf.STRONGHOLD_USER_TEST_FUNC(request.user)
-            and conf.STRONGHOLD_TEST_REQUEST_FUNC(request, view_func, view_args, view_kwargs)
+            and conf.STRONGHOLD_REQUEST_TEST_FUNC(request, view_func, view_args, view_kwargs)
             or utils.is_view_func_public(view_func)
             or self.is_public_url(request.path_info)
         ):

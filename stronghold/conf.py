@@ -31,7 +31,7 @@ def test_request(request, view_func, view_args, view_kwargs) -> bool:
 
 
 STRONGHOLD_USER_TEST_FUNC = getattr(settings, "STRONGHOLD_USER_TEST_FUNC", is_authenticated)
-STRONGHOLD_TEST_REQUEST_FUNC = getattr(settings, "STRONGHOLD_TEST_REQUEST_FUNC", test_request)
+STRONGHOLD_REQUEST_TEST_FUNC = getattr(settings, "STRONGHOLD_TEST_REQUEST_FUNC", test_request)
 
 if STRONGHOLD_DEFAULTS:
     if "django.contrib.auth" in settings.INSTALLED_APPS:
