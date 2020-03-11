@@ -68,7 +68,7 @@ class SomeView(View):
 
 	@method_decorator(public)
 	def dispatch(self, *args, **kwargs):
-    	return super(SomeView, self).dispatch(*args, **kwargs)
+    	        return super(SomeView, self).dispatch(*args, **kwargs)
 ```
 
 ### For class based views (mixin)
