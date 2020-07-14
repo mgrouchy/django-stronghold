@@ -4,7 +4,7 @@
 
 Get inside your stronghold and make all your Django views default login_required
 
-Stronghold is a very small and easy to use Django app that makes your project require login on all of your views.
+Stonghold is a very small and easy to use Django app that defaults all your project's views to require login.
 
 WARNING: still in development, so some of the DEFAULTS and such will be changing without notice.
 
