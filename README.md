@@ -26,10 +26,20 @@ INSTALLED_APPS = (
 )
 ```
 
-Then add the stronghold middleware to your MIDDLEWARE_CLASSES in your Django settings file
+Then add the stronghold middleware to your `MIDDLEWARE_CLASSES` in your Django 1.x settings file
 
 ```python
 MIDDLEWARE_CLASSES = (
+    #...
+    'stronghold.middleware.LoginRequiredMiddleware',
+)
+
+```
+
+or `MIDDLEWARE` in your Django 2.x 3.x settings file
+
+```python
+MIDDLEWARE = (
     #...
     'stronghold.middleware.LoginRequiredMiddleware',
 )
