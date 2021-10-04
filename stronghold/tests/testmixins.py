@@ -17,11 +17,19 @@ class StrongholdMixinsTests(unittest.TestCase):
         class TestView(StrongholdPublicMixin, View):
             pass
 
-        self.assertTrue(TestView.dispatch.STRONGHOLD_IS_PUBLIC)
+        self.assertTrue(TestView.as_view().STRONGHOLD_IS_PUBLIC)
 
     def test_public_mixin_sets_attr_with_multiple_mixins(self):
 
         class TestView(StrongholdPublicMixin, TemplateResponseMixin, View):
             template_name = 'dummy.html'
 
-        self.assertTrue(TestView.dispatch.STRONGHOLD_IS_PUBLIC)
+        self.assertTrue(TestView.as_view().STRONGHOLD_IS_PUBLIC)
+
+    def test_public_mixin_sets_attr_with_explicit_dispatch(self):
+
+        class TestView(StrongholdPublicMixin, View):
+            def dispatch(self, request, *args, **kwargs):
+                return super().dispatch(request, *args, **kwargs)
+
+        self.assertTrue(TestView.as_view().STRONGHOLD_IS_PUBLIC)
