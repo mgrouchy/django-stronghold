@@ -28,7 +28,7 @@ class StrongholdMiddlewareTestCase(TestCase):
 class LoginRequiredMiddlewareTests(TestCase):
 
     def setUp(self):
-        self.middleware = LoginRequiredMiddleware()
+        self.middleware = LoginRequiredMiddleware(True)
 
         self.request = RequestFactory().get('/test-protected-url/')
         self.request.user = mock.Mock()
