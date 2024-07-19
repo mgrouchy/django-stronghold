@@ -1,4 +1,4 @@
-import mock
+from unittest import mock
 import re
 
 from stronghold import conf
